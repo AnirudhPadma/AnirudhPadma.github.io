@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+<style>
+    * {
+        box-sizing: border-box;
+        color: rgb(255, 255, 255);
+        font-family: "Noto Sans JP", sans-serif;
+        letter-spacing: 2px;
+        font-size: 60px;
+    }
+    
+    body {
+        background-color: rgb(43, 43, 43);
+        display: flex;
+        flex-flow: column wrap;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    header {
+        font-weight: bold;
+        text-align: right;
+    }
+    
+    .row {
+        display: -ms-flexbox;
+        /* IE10 */
+        display: flex;
+        -ms-flex-wrap: wrap;
+        /* IE10 */
+        flex-wrap: wrap;
+        padding: 0 4px;
+    }
+    /* Create four equal columns that sits next to each other */
+    
+    .column {
+        -ms-flex: 25%;
+        /* IE10 */
+        flex: 25%;
+        max-width: 35%;
+        padding: 0 4px;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    .column img {
+        margin-top: 8px;
+        vertical-align: middle;
+        width: 100%;
+        border-radius: 15px;
+        cursor: pointer;
+    }
+    /* Responsive layout - makes a two column-layout instead of four columns */
+    
+    @media screen and (max-width: 800px) {
+        .column {
+            -ms-flex: 50%;
+            flex: 50%;
+            max-width: 50%;
+        }
+    }
+    /* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+    
+    @media screen and (max-width: 600px) {
+        .column {
+            -ms-flex: 100%;
+            flex: 100%;
+            max-width: 100%;
+        }
+    }
+    
+    img:hover {
+        padding: 15px;
+        backdrop-filter: blur(16px) saturate(160%);
+        -webkit-backdrop-filter: blur(16px) saturate(180%);
+        background-color: rgba(0, 0, 0, 0.75);
+        border: 1px solid rgba(255, 255, 255, 0.125);
+        -moz-transform: scale(3);
+        -webkit-transform: scale(3);
+        -o-transform: scale(3);
+        -ms-transform: scale(3);
+        transform: scale(1.2);
+    }
+    
+    .player {
+        border-radius: 12px;
+        overflow: hidden;
+        z-index: 1;
+        height: 500px;
+        width: 850px;
+        margin-left: 50%;
+        margin-top: -490px;
+    }
+    
+    .btn {
+        padding: 15px 40px;
+        font-size: 19px;
+        text-align: center;
+        cursor: pointer;
+        outline: none;
+        color: teal;
+        background-color: rgba(20, 20, 20, 0.75);
+        border: none;
+        border-radius: 50px;
+        font-weight: bold;
+        margin-bottom: 50px;
+        margin-top: 100px;
+        transition: all 1.0s;
+    }
+    
+    .btn:hover {
+        background-color: white;
+        color: black;
+        border-radius: 5px;
+        transition: all 0.5s;
+    }
+    
+    .btn:active {
+        transform: scale(0.98);
+        border-radius: 5px;
+        background-color: teal;
+        transition: all 0.5s;
+    }
+    
+    .row {
+        display: flex;
+    }
+    
+    .column {
+        flex: 33.33%;
+        padding: 10px;
+    }
+    /* width */
+    
+     ::-webkit-scrollbar {
+        width: 12px;
+    }
+    /* Track */
+    
+     ::-webkit-scrollbar-track {
+        background-color: rgb(20, 20, 20);
+    }
+    /* Handle */
+    
+     ::-webkit-scrollbar-thumb {
+        background: teal;
+        border-radius: 5px;
+    }
+    /* Handle on hover */
+    
+     ::-webkit-scrollbar-thumb:hover {
+        background: white;
+    }
+</style>
+
+<body>
+    <button class="btn" type="button" onclick="location.href='basics.html'">GO BACK</button>
+
+    <!-- Header -->
+    <div class="header">
+        <h1>NS200 GALLERY</h1>
+    </div>
+
+    <!-- Photo Grid -->
+    <div class="row">
+        <div class="column">
+            <img src="image.jpg" style="width:100%">
+            <img src="image18.png" style="width:100%">
+            <img src="image17.jpg" style="width:100%">
+            <img src="image16.jpg" style="width:100%">
+            <img src="image7.jpg" style="width:100%">
+            <img src="image8.jpg" style="width:100%">
+            <img src="image9.jpg" style="width:100%">
+        </div>
+        <div class="column">
+            <img src="image19.jpg" style="width:100%">
+            <img src="image20.jpg" style="width:100%">
+            <img src="image21.jpg" style="width:100%">
+            <img src="image22.jpg" style="width:100%">
+            <img src="image6.jpg" style="width:100%">
+            <img src="image23.jpg" style="width:100%">
+        </div>
+        <div class="player">
+            <iframe width="942" height="530" src="https://www.youtube.com/embed/qPqX2F0lMdM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+    </div>
+
+</body>
+
+</html>

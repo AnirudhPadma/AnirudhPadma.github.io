@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="UTF-8" <body>
+<style>
+    h1 {
+        font-weight: bold;
+        text-align: right;
+    }
+
+    h2 {
+        font-family: cursive;
+        color: red;
+    }
+
+    table {
+        font-size: 20px;
+        color: #ffffff;
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        text-align: left;
+        padding: 20px;
+    }
+
+    h2 {
+        font-family: arial, sans-serif;
+        margin-left: 20px;
+        font-size: 30px;
+    }
+
+    td,
+    th {
+        border: 1px solid rgb(17, 25, 40);
+        text-align: right;
+        padding: 35px;
+    }
+
+    tr:nth-child(odd) {
+        background-color: rgb(17, 25, 40);
+        border-radius: 12px;
+    }
+
+
+
+
+    .card {
+        backdrop-filter: blur(16px) saturate(180%);
+        -webkit-backdrop-filter: blur(16px) saturate(180%);
+        background-color: rgba(17, 25, 40, 0.75);
+        border-radius: 5px;
+        transition: 0.3s;
+        width: 45%;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 20px;
+        padding: 10px;
+    }
+
+    body {
+        background-image: url('image16.jpg');
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover;
+    }
+
+    * {
+        box-sizing: border-box;
+    }
+
+    .row {
+        display: flex;
+    }
+
+    .column {
+        flex: 33.33%;
+        padding: 10px;
+    }
+
+    .btn {
+        backdrop-filter: blur(16px) saturate(180%);
+        -webkit-backdrop-filter: blur(16px) saturate(180%);
+        padding: 15px 40px;
+        font-size: 19px;
+        text-align: center;
+        cursor: pointer;
+        outline: none;
+        color: red;
+        background-color: rgba(17, 25, 40, 0.75);
+        border: none;
+        border-radius: 50px;
+        font-weight: bold;
+        transition: all 1.0s;
+
+    }
+
+    .btn:hover {
+        background-color: red;
+        color: rgba(17, 25, 40, 0.75);
+        border-radius: 5px;
+        transition:all 0.5s;
+
+    }
+
+    .btn:active {
+        transform: scale(0.98);
+        border-radius: 5px;
+        background-color: lightpink;
+        transition:all 0.5s;
+
+    }
+
+    /* width */
+    ::-webkit-scrollbar {
+        width: 12px;
+    }
+
+    /* Track */
+    ::-webkit-scrollbar-track {
+        backdrop-filter: blur(16px) saturate(180%);
+        -webkit-backdrop-filter: blur(16px) saturate(180%);
+        background-color: rgba(17, 25, 40, 0.75);
+    }
+
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+        background: red;
+        border-radius: 5px;
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+        background: #202020;
+    }
+
+    img {
+        border-radius: 5px;
+    }
+
+
+    .parentimage {
+        backdrop-filter: blur(16px) saturate(180%);
+        -webkit-backdrop-filter: blur(16px) saturate(180%);
+        background-color: rgba(255, 255, 255, 0.75);
+        border-radius: 5px;
+        border: 1px solid rgba(255, 255, 255, 0.125);
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5);
+        margin-left: 100px;
+        margin-top: 15px;
+        margin-bottom: 70px;
+        width: 300px;
+        padding: 1px;
+        -webkit-transition: all .3s ease-out;
+        -moz-transition: all .3s ease-out;
+        -o-transition: all .3s ease-out;
+        transition: all .3s ease-out;
+    }
+
+    .parentimage:hover {
+        padding: 15px;
+        backdrop-filter: blur(16px) saturate(160%);
+        -webkit-backdrop-filter: blur(16px) saturate(180%);
+        background-color: rgba(255, 255, 255, 0.75);
+        border: 1px solid rgba(255, 255, 255, 0.125);
+        -moz-transform: scale(3);
+        -webkit-transform: scale(3);
+        -o-transform: scale(3);
+        -ms-transform: scale(3);
+        transform: scale(1.5);
+    }
+
+    figcaption {
+        text-align: center;
+        font-weight: bold;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        color: #183efa;
+    }
+</style>
+<h1 style="font-size:70px;color: #ffffff;"><i>SPECIFICATIONS</i></h1>
+
+<button class="btn" type="button" onclick="location.href='basics.html'">GO BACK</button>
+<div class="card">
+    <div>
+        <h2>Engine</h2>
+        <table>
+            <tr>
+                <th>Engine Type</th>
+                <td>4 - stroke, SOHC 4-Valve, Liquid Cooled, Triple Spark, BSVI Compliant FI DTS-i Engine</td>
+
+            </tr>
+            <tr>
+                <th>Max Power</th>
+                <td>24.5 PS @ 9750 rpm</td>
+            </tr>
+            <tr>
+                <th>Max Torque</th>
+                <td>18.5 Nm @ 8000 rpm</td>
+            </tr>
+            <tr>
+                <th>No Of Cylinders</th>
+                <td>1</td>
+            </tr>
+            <tr>
+                <th>Fuel Type</th>
+                <td>Petrol</td>
+            </tr>
+            <tr>
+                <th>Fuel Supply</th>
+                <td>Fuel Injection</td>
+            </tr>
+            <tr>
+                <th>Engine Displacement</th>
+                <td>199.5cc</td>
+            </tr>
+            <tr>
+                <th>Drive Type</th>
+                <td>Chain Drive</td>
+            </tr>
+            <tr>
+                <th>Valve Per Cylinder</th>
+                <td>4</td>
+            </tr>
+
+        </table>
+    </div>
+</div>
+<div class="card">
+    <div>
+        <h2>Transmission</h2>
+        <table>
+            <tr>
+                <th>Transmission Type</th>
+                <td>Manual</td>
+            </tr>
+        </table>
+    </div>
+</div>
+<div class="card">
+    <div>
+        <h2>Brakes</h2>
+        <table>
+            <tr>
+                <th>Front</th>
+                <td>Disc</td>
+            </tr>
+            <tr>
+                <th>Rear</th>
+                <td>Disc</td>
+            </tr>
+        </table>
+    </div>
+</div>
+<div class="card">
+    <div>
+        <h2>Performance And Fuel Economy</h2>
+        <table>
+            <tr>
+                <th>Mileage(City)</th>
+                <td>40.84Kmpl</td>
+            </tr>
+            <tr>
+                <th>Mileage(Highway)</th>
+                <td>40.36Kmpl</td>
+            </tr>
+            <tr>
+                <th>Braking(100-0kmph)</th>
+                <td>56.16mm</td>
+            </tr>
+        </table>
+    </div>
+</div>
+<div class="card">
+    <div>
+        <h2>Chassis and Suspension</h2>
+        <table>
+            <tr>
+                <th>Suspension-Front</th>
+                <td>Telescopic with Anti-friction Bush</td>
+            </tr>
+            <tr>
+                <th>Suspension-Rear</th>
+                <td>Nitrox mono shock absorber with Canister</td>
+            </tr>
+            <tr>
+                <th>Chasis</th>
+                <td>Perimeter Frame</td>
+            </tr>
+        </table>
+    </div>
+</div>
+<div class="card">
+    <div>
+        <h2>Tyres and Wheels</h2>
+        <table>
+            <tr>
+                <th>Tyre Size</th>
+                <td>Front :-100/80-17, Rear :-130/70-17</td>
+            </tr>
+            <tr>
+                <th>Radial Tyre</th>
+                <td>Yes</td>
+            </tr>
+            <tr>
+                <th>Wheels Type (Pressed Steel/ Alloy)</th>
+                <td>Alloy</td>
+            </tr>
+            <tr>
+                <th>Wheel Size</th>
+                <td>Front :-431.8 mm,Rear :-431.8 mm</td>
+            </tr>
+            <tr>
+                <th>Tyre Tyre</th>
+                <td>Tubeless</td>
+            </tr>
+        </table>
+    </div>
+</div>
+<div class="card">
+    <div>
+        <h2>Dimensions</h2>
+        <table>
+            <tr>
+                <th>Length*Width*Height</th>
+                <td>2017*804*1075 mm^3</td>
+            </tr>
+            <tr>
+                <th>Wheelbase</th>
+                <td>1363 mm</td>
+            </tr>
+            <tr>
+                <th>Ground Clearance</th>
+                <td>168mm</td>
+            </tr>
+            <tr>
+                <th>Fuel Capacity</th>
+                <td>12 Litres</td>
+            </tr>
+            <tr>
+                <th>Tail Light</th>
+                <td>LED</td>
+            </tr>
+            <tr>
+                <th>Front Brake Diameter</th>
+                <td>300mm</td>
+            </tr>
+            <tr>
+                <th>Rear Brake Diameter</th>
+                <td>230mm</td>
+            </tr>
+            <tr>
+                <th>Length</th>
+                <td>2017mm</td>
+            </tr>
+            <tr>
+                <th>Height</th>
+                <td>1075mm</td>
+            </tr>
+            <tr>
+                <th>Width</th>
+                <td>804mm</td>
+            </tr>
+            <tr>
+                <th>Kerb Weight</th>
+                <td>156Kg</td>
+            </tr>
+
+        </table>
+    </div>
+</div>
+<div class="card">
+    <div>
+        <h2>Electricals</h2>
+        <table>
+            <tr>
+                <th>Battery Type</th>
+                <td>Full DC MF</td>
+            </tr>
+            <tr>
+                <th>Turn Signal Lamp</th>
+                <td>Bulb</td>
+            </tr>
+            <tr>
+                <th>LED Tail Lights</th>
+                <td>Yes</td>
+            </tr>
+        </table>
+    </div>
+</div>
+<div class="card">
+    <div>
+        <h2>Varients</h2>
+        <table>
+            <tr>
+                <th>BS6</th>
+                <td>1.46 Lakhs</td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+</body>
+
+</html>
