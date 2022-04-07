@@ -45,6 +45,7 @@ div {
     border: none;
     border-radius: 0px;
     border: 1px solid transparent;
+    color: lightseagreen;
     z-index: 4;
     cursor: pointer;
 }
