@@ -29,7 +29,7 @@ document.querySelectorAll(".win-btn").forEach((b) => {
         const rect = e.target.getBoundingClientRect();
         const x = e.clientX - rect.left; //x position within the element.
         const y = e.clientY - rect.top; //y position within the element.
-        e.target.style.background = `radial-gradient(circle at ${x}px ${y}px , rgba(255,99,71,0.25),rgba(255,99,71,0) )`;
+        e.target.style.background = `radial-gradient(circle at ${x}px ${y}px , rgba(32, 178, 170, 0.25),rgba(32, 178, 170,0.25) )`;
         e.target.style.borderImage = `radial-gradient(20% 65% at ${x}px ${y}px ,rgba(255,99,71,0.7),rgba(255,99,71,0.4),rgba(255,99,71,0),black,transparent ) 9 / 2px / 0px stretch `;
     });
 });
@@ -58,7 +58,7 @@ body.addEventListener("mousemove", (e) => {
                 if (!element.style.borderImage)
                     element.style.borderImage = `radial-gradient(${offset * 2}px ${
              offset * 2
-           }px at ${bx}px ${by}px ,rgba(255,99,71,0.7),rgba(255,99,71,0.1),transparent ) 9 / 1px / 0px stretch `;
+           }px at ${bx}px ${by}px ,rgb(32, 178, 170),rgba(32, 178, 170, 0.1),transparent ) 9 / 1px / 0px stretch `;
                 return [...acc, element];
             }
         }
