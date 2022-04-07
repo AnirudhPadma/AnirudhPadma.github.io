@@ -29,8 +29,8 @@ document.querySelectorAll(".win-btn").forEach((b) => {
         const rect = e.target.getBoundingClientRect();
         const x = e.clientX - rect.left; //x position within the element.
         const y = e.clientY - rect.top; //y position within the element.
-        e.target.style.background = `radial-gradient(circle at ${x}px ${y}px , rgba(32, 178, 170, 0.25),rgba(32, 178, 170,0.25) )`;
-        e.target.style.borderImage = `radial-gradient(20% 65% at ${x}px ${y}px ,rgba(255,99,71,0.7),rgba(255,99,71,0.4),rgba(255,99,71,0),black,transparent ) 9 / 2px / 0px stretch `;
+        e.target.style.background = `radial-gradient(circle at ${x}px ${y}px , rgba(32, 178, 170, 0.25),rgba(32, 178, 170,0) )`;
+        e.target.style.borderImage = `radial-gradient(20% 65% at ${x}px ${y}px , rgba(32, 178, 170,0.7),rgba(32, 178, 170,0.4),rgba(32, 178, 170,0),lightseagreen,transparent ) 9 / 2px / 0px stretch `;
     });
 });
 
