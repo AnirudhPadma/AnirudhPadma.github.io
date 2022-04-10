@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+
+<head>
+    <link rel="stylesheet" href="sty.css">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=yes" />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100&display=swap">
+</head>
+<style>
+    .container {
+        width: 100%;
+        height: 100vh;
+        background-image: linear-gradient(rgba(174, 0, 255, 0.8), rgba(255, 255, 255, 0.8)), url(pic-40.jpg);
+        background-position: center;
+        background-size: cover;
+        padding-left: 8%;
+        padding-right: 8%;
+        box-sizing: border-box;
+    }
+
+    .dropdown-content a:hover {
+        background-color: rgba(174, 0, 255, 0.8);
+        border-radius: 15px;
+    }
+
+    h1 {
+        color: rgb(255, 255, 255);
+        font-size: 80px;
+    }
+
+    p {
+        color: rgb(0, 0, 0);
+        font-size: 15px;
+        font-weight: 700;
+    }
+
+    p:hover {
+        font-size: 25px;
+        font-weight: 700;
+    }
+
+    .card {
+        width: 180px;
+        height: 100px;
+        display: inline-block;
+        border-radius: 5px;
+        padding: 5px;
+        box-sizing: border-box;
+        cursor: pointer;
+        margin: 9px 5px;
+        background-position: center;
+        background-size: cover;
+        transition: transform 0.5s;
+        -webkit-transition: all .3s ease-out;
+        -moz-transition: all .3s ease-out;
+        -o-transition: all .3s ease-out;
+        transition: all .3s ease-out;
+    }
+
+    .card:hover {
+        -moz-transform: scale(8);
+        -webkit-transform: scale(8);
+        -o-transform: scale(8);
+        -ms-transform: scale(8);
+        transform: scale(2.5);
+    }
+
+    .card1 {
+        background-image: url(pic-41.jpg);
+    }
+
+    .card2 {
+        background-image: url(pic-42.jpg);
+    }
+
+    .card3 {
+        background-image: url(pic-43.jpg);
+    }
+
+    .card4 {
+        background-image: url(pic-44.jpg);
+    }
+</style>
+
+
+<body>
+    <div class="container">
+        <div class="navbar">
+            <nav>
+                <ul>
+                    <li><a onclick="location.href='basics.html'">HOME</a></li>
+                    <li class="dropdown">
+                        <a href="javascript:void(0)" class="dropbtn">COUNTRY</a>
+                        <div class="dropdown-content">
+                            <a onclick="location.href='brazil.html'">Brazil</a>
+                            <a onclick="location.href='china.html'">China</a>
+                            <a onclick="location.href='egypt.html'">Egypt</a>
+                            <a onclick="location.href='india.html'">India</a>
+                            <a onclick="location.href='italy.html'">Italy</a>
+                            <a onclick="location.href='jordan.html'">Jordan</a>
+                            <a onclick="location.href='mexico.html'">Mexico</a>
+                            <a onclick="location.href='peru.html'">Peru</a>
+                        </div>
+                    <li class="dropdown">
+                        <a href="javascript:void(0)" class="dropbtn">ABOUT</a>
+                        <div class="dropdown-content">
+                            <a href="">Version 1.0,
+                                Made By Anirudh</a>
+                </ul>
+            </nav>
+        </div>
+
+
+        <div class="row">
+            <div class="col">
+                <h1>Machu Picchu</h1>
+                <p>Machu Picchu is an Inca site in Peru that is thought to have been built as an estate for Pachacuti,
+                    an Incan emperor. It was built in the 15th century, approximately around 1450. It was abandoned as a
+                    place for Inca rulers in about 1572. It was discovered by the outside world in 1911and has since
+                    become a tourist attraction. By 1976 at least 30% of the site had been restored and those
+                    restoration efforts still continue today.
+                </p>
+
+            </div>
+            <div class="col">
+                <div class="card card1">
+                    <h5></h5>
+                </div>
+                <div class="card card2">
+                    <h5></h5>
+                </div>
+                <div class="card card3">
+                    <h5></h5>
+                </div>
+                <div class="card card4">
+                    <h5></h5>
+                </div>
+            </div>
+
+        </div>
+</body>
+
+</html>
