@@ -1,6 +1,223 @@
-<html> 
-<head><title>Hello, World!</title></head> 
-<body> 
-Hello, World! 
-</body> 
-</html> 
+<!DOCTYPE html>
+<html lang="en-US">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="UTF-8" <body>
+<style>
+    h1 {
+        font-weight: bold;
+        text-align: center;
+    }
+    li {
+        text-align: left;
+        font-size: 25px;
+        color: #ffffff;
+    }
+    
+    p {
+        font-size: 25px;
+        color: #ffffff;
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        text-align: center;
+        padding: 10px;
+    }
+    
+    .card {
+        backdrop-filter: blur(16px) saturate(180%);
+        -webkit-backdrop-filter: blur(16px) saturate(180%);
+        background-color: rgba(17, 25, 40, 0.75);
+        border-radius: 50px;
+        transition: 0.3s;
+        width: 45%;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 20px;
+        padding: 10px;
+        margin-bottom: 20px;
+    }
+    
+    body {
+        background-color: rgb(249, 204, 93);
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover;
+    }
+    
+    .btn {
+        padding: 15px 40px;
+        font-size: 19px;
+        text-align: center;
+        cursor: pointer;
+        outline: none;
+        color: #ffffff;
+        background-color: rgba(20, 20, 20, 0.75);
+        border: none;
+        border-radius: 50px;
+        font-weight: bold;
+        margin-bottom: 50px;
+        transition: all 1.0s;
+    }
+    
+    .btn:hover {
+        background-color: #183efa;
+        color: black;
+        border-radius: 5px;
+        transition: all 0.5s;
+    }
+    
+    .btn:active {
+        transform: scale(0.98);
+        border-radius: 5px;
+        background-color: lightgreen;
+        transition: all 0.5s;
+    }
+    
+    .row {
+        display: flex;
+    }
+    
+    .column {
+        flex: 33.33%;
+        padding: 10px;
+    }
+    /* width */
+    
+     ::-webkit-scrollbar {
+        width: 12px;
+    }
+    /* Track */
+    
+     ::-webkit-scrollbar-track {
+        background-color: rgb(20, 20, 20);
+    }
+    /* Handle */
+    
+     ::-webkit-scrollbar-thumb {
+        background: rgb(144, 101, 207);
+        border-radius: 5px;
+    }
+    /* Handle on hover */
+    
+     ::-webkit-scrollbar-thumb:hover {
+        background: #202020;
+    }
+    
+    img {
+        border-radius: 5px;
+    }
+
+    
+    .player {
+        border-radius: 12px;
+        overflow: hidden;
+        z-index: 1;
+        height: 500px;
+        width: 800px;
+        float: right;
+        margin-top: -600px;
+    }
+    
+   
+</style>
+<div class="card">
+    <div>
+        <h1 style="font-size:70px;color: #ffffff;"><i>PACE UNIVERSITY</i></h1>
+        <h2 style="text-align:center;color: #ffffff;">CS 612 – Concepts and Structures in Internet Computing</h2>
+        <p style="text-align:center;">Fall 2023</p>
+    </div>      
+</div>    
+<button class="btn" type="button" onclick="location.href='page2.html'">Next</button>
+  
+
+<div class="card">
+    <div>
+        
+        <p><span class="tab"></span><b>Name:</b> Doosan Baik (He/His/Him)<br>
+            <span class="tab"></span><b>Email:</b> dbaik@pace.edu<br>
+            <span class="tab"></span><b>Office Location:</b> Online meetings only; please sign-up for office hours 24 hours in advance.<br>
+            <span class="tab"></span><b>Office Hours:</b> Saturday 12pm – 2pm<br>
+
+
+        </p>
+    </div>
+    
+</div>
+<div class="card">
+    <div>
+        <p><b> Course Information </b></p>
+<p><span class="tab"></span><b>Description:</b> Integrated hands-on coverage of fundamental concepts and technologies for enterprise and Internet computing. Topics include data storage; XML data specification, parsing and validation;data and language translation; networking and Web technology overview; software framework technology for controlling software system complexity; and a roadmap for the enterprise computing technologies.<br>
+<span class="tab"></span><b>Credits:</b> 3<br>
+<span class="tab"></span><b>Pre-requisites:</b> A grade of C or better in CS604 AND CS606<br>
+<span class="tab"></span><b>Meeting:</b> Saturday 9am – 12pm; 1 Pace Plaza W502<br></p>
+    </div>      
+</div> 
+<div class="card">
+    <div>
+        <p><b>Textbooks Required</b></p>
+        <p><span class="tab"></span><b>“Internet Computing Hands-on Tutorials”</b>, Lixin Tao</p></p>
+    </div>      
+</div> 
+<div class="card">
+    <div>
+        <p><b>Learning Objectives</b></p>
+<ol type="1">
+<li>Students will master the key language processing concepts and skills, and be able to</li>
+<ul>
+<li>understand the function of major language processing components include lexical analysis, grammars, parsers,and interpreters;</li>
+<li>use XML technologies to model and validate business data;</li>
+<li>implement Web-based GUI with HTML;</li>
+<li>use XSL and XSLT to transform data from XML to HTML for presentation in Web browsers.</li>
+</ul>
+</li>
+<li>
+Students will master basic database programming skills, and be able to
+<ul>
+<li>understand the basic concepts and components of relational databases;</li>
+<li>understand basic SQL language features for creating tables, inserting/deleting data into tables and making inquiries through JDBC;</li>
+<li>design and implement Java applications based on MySQL database.</li>
+</ul>
+</li>
+<li>
+Students will master the networking fundamentals, and be able to
+<ul>
+<li>understand the layered network architecture and fundamental properties of TCP/IP;</li>
+<li>understand and conduct multi-thread programming and thread synchronization;</li>
+<li>use the socket abstraction to implement simple client/server applications.</li>
+</ul>
+</li>
+<li>
+Students will master the fundamental Web application architecture and concepts, and be able to
+<ul>
+<li>justify the tiered web architecture;</li>
+<li>understand HTTP requests/responses and HTML form processing;</li>
+<li>use servlets to implement a simple Web application on the Tomcat;</li>
+<li>understand the proxy design pattern underlying all remote method/function invocation technologies, and redo an existing Web application as a web service on Tomcat;</li>
+<li>implement global heterogeneous system integration with JSON and RESTful Web services.</li>
+</ul>
+</li>
+<li>Students will master the importance and fundamental concepts of software framework based programming, and be able to
+<ul>
+<li>explain the relationship among object-oriented programming, component-based programming, and serviceoriented architecture;</li>
+<li>understand the design and implementation of a simple software framework for networking;</li>
+<li>redo an existing networking application with a simple software framework to see how we can hide networking and multithreading from programmers.</li>
+</ul>
+</li>
+<li>
+Students will get the roadmap of the Internet computing, and be able to
+<ul>
+<li>understand the fundamental concepts of cluster-based computing and grid computing;</li>
+<li>understand fundamentals of server-based computing technologies;</li>
+<li>understand fundamentals of service-oriented computing;</li>
+<li>write a simple parallel program in Java that can run on a cluster of PCs.</li>
+</ul>
+</li>
+</ol>
+    </div>      
+</div> 
+</div>
+
+
+
+</body>
+
+</html>
