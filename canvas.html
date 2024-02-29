@@ -34,12 +34,15 @@
       window.addEventListener('resize', resizeCanvas);
 
       // Define parallelogram coordinates
-      let topLeft = { x: canvas.width / 4, y: 0 };
-      let topRight = { x: 3 * canvas.width / 4, y: 0 };
-      let bottomLeft = { x: 0, y: canvas.height };
-      let bottomRight = { x: canvas.width, y: canvas.height };
-      let centerTop = { x: canvas.width / 2, y: canvas.height / 4 };
-      let centerBottom = { x: canvas.width / 2, y: 3 * canvas.height / 4 };
+      let p1 = { x: canvas.width / 4, y: 0 };
+      let p2 = { x: 3 * canvas.width / 4, y: 0 };
+      let p3 = { x: canvas.width, y: canvas.height / 2 };
+      let p4 = { x: canvas.width / 2, y: canvas.height };
+      let p5 = { x: 0, y: canvas.height / 2 };
+      let p6 = { x: canvas.width / 2, y: 0 };
+      let p7 = { x: canvas.width, y: canvas.height / 2 };
+      let p8 = { x: canvas.width / 2, y: canvas.height };
+      let p9 = { x: 0, y: canvas.height / 2 };
 
       // Define colors
       const colors = { red: 'red', black: 'black' };
@@ -58,8 +61,8 @@
       };
 
       const drawParallelograms = () => {
-        drawParallelogram(topLeft, centerTop, bottomRight, centerBottom, colors.red);
-        drawParallelogram(topRight, centerTop, bottomLeft, centerBottom, colors.black);
+        drawParallelogram(p1, p2, p3, p4, colors.red);
+        drawParallelogram(p6, p7, p8, p9, colors.black);
       };
 
       drawParallelograms();
