@@ -33,32 +33,18 @@
       resizeCanvas();
       window.addEventListener('resize', resizeCanvas);
 
-      // Define parallelogram coordinates
-      let p1 = { x: canvas.width / 4, y: 0 };
-      let p2 = { x: 3 * canvas.width / 4, y: 0 };
-      let p3 = { x: canvas.width, y: canvas.height / 2 };
-      let p4 = { x: 3 * canvas.width / 4, y: canvas.height };
-      let p5 = { x: canvas.width / 4, y: canvas.height };
-      let p6 = { x: 0, y: canvas.height / 2 };
+      // Define triangle coordinates
+      let topLeft = { x: 0, y: 0 };
+      let center = { x: canvas.width / 2, y: canvas.height / 2 };
+      let bottomLeft = { x: 0, y: canvas.height };
+      let topRight = { x: canvas.width, y: 0 };
+      let bottomRight = { x: canvas.width, y: canvas.height };
 
-      let p7 = { x: 0, y: canvas.height / 4 };
-      let p8 = { x: canvas.width, y: canvas.height / 4 };
-      let p9 = { x: 3 * canvas.width / 4, y: canvas.height };
-      let p10 = { x: canvas.width / 2, y: 3 * canvas.height / 4 };
-      let p11 = { x: canvas.width / 4, y: canvas.height };
-      let p12 = { x: canvas.width / 2, y: canvas.height / 4 };
-
-      // Define colors
-      const colors = { red: 'red', black: 'black' };
-
-      const drawParallelogram = (p1, p2, p3, p4, p5, p6, color) => {
+      const drawTriangle = (x1, y1, x2, y2, x3, y3, color) => {
         context.beginPath();
-        context.moveTo(p1.x, p1.y);
-        context.lineTo(p2.x, p2.y);
-        context.lineTo(p3.x, p3.y);
-        context.lineTo(p4.x, p4.y);
-        context.lineTo(p5.x, p5.y);
-        context.lineTo(p6.x, p6.y);
+        context.moveTo(x1, y1);
+        context.lineTo(x2, y2);
+        context.lineTo(x3, y3);
         context.closePath();
 
         context.lineWidth = Math.min(canvas.width, canvas.height) / 50;
@@ -66,12 +52,10 @@
         context.stroke();
       };
 
-      const drawParallelograms = () => {
-        drawParallelogram(p1, p2, p3, p4, p5, p6, colors.red);
-        drawParallelogram(p7, p8, p9, p10, p11, p12, colors.black);
+      const drawTriangles = (color) => {
+        drawTriangle(topLeft.x, topLeft.y, center.x, center.y, bottomLeft.x, bottomLeft.y, color);
+        drawTriangle(topRight.x, topRight.y, center.x, center.y, bottomRight.x, bottomRight.y, color);
       };
-
-      drawParallelograms();
 
       function handleDeviceMotion(e) {
         context.clearRect(0, 0, canvas.width, canvas.height); // clear canvas
@@ -79,12 +63,15 @@
         // Use e.accelerationIncludingGravity.x and e.accelerationIncludingGravity.y to subtly change your image
         const rotation = Math.atan2(e.accelerationIncludingGravity.y, e.accelerationIncludingGravity.x);
         context.save();
-        context.translate(canvas.width / 2, canvas.height / 2);
+        context.translate(center.x, center.y);
         context.rotate(rotation);
-        context.translate(-canvas.width / 2, -canvas.height / 2);
+        context.translate(-center.x, -center.y);
 
-        // Redraw your image here
-        drawParallelograms();
+        // Generate a color based on the device motion
+        const color = `rgb(${Math.abs(e.accelerationIncludingGravity.x % 256)}, ${Math.abs(e.accelerationIncludingGravity.y % 256)}, ${Math.abs(e.accelerationIncludingGravity.z % 256)})`;
+
+        // Redraw your image here with the new color
+        drawTriangles(color);
 
         context.restore();
       }
