@@ -37,22 +37,28 @@
       let p1 = { x: canvas.width / 4, y: 0 };
       let p2 = { x: 3 * canvas.width / 4, y: 0 };
       let p3 = { x: canvas.width, y: canvas.height / 2 };
-      let p4 = { x: canvas.width / 2, y: canvas.height };
-      let p5 = { x: 0, y: canvas.height / 2 };
-      let p6 = { x: canvas.width / 2, y: 0 };
-      let p7 = { x: canvas.width, y: canvas.height / 2 };
-      let p8 = { x: canvas.width / 2, y: canvas.height };
-      let p9 = { x: 0, y: canvas.height / 2 };
+      let p4 = { x: 3 * canvas.width / 4, y: canvas.height };
+      let p5 = { x: canvas.width / 4, y: canvas.height };
+      let p6 = { x: 0, y: canvas.height / 2 };
+
+      let p7 = { x: 0, y: canvas.height / 4 };
+      let p8 = { x: canvas.width, y: canvas.height / 4 };
+      let p9 = { x: 3 * canvas.width / 4, y: canvas.height };
+      let p10 = { x: canvas.width / 2, y: 3 * canvas.height / 4 };
+      let p11 = { x: canvas.width / 4, y: canvas.height };
+      let p12 = { x: canvas.width / 2, y: canvas.height / 4 };
 
       // Define colors
       const colors = { red: 'red', black: 'black' };
 
-      const drawParallelogram = (p1, p2, p3, p4, color) => {
+      const drawParallelogram = (p1, p2, p3, p4, p5, p6, color) => {
         context.beginPath();
         context.moveTo(p1.x, p1.y);
         context.lineTo(p2.x, p2.y);
         context.lineTo(p3.x, p3.y);
         context.lineTo(p4.x, p4.y);
+        context.lineTo(p5.x, p5.y);
+        context.lineTo(p6.x, p6.y);
         context.closePath();
 
         context.lineWidth = Math.min(canvas.width, canvas.height) / 50;
@@ -61,8 +67,8 @@
       };
 
       const drawParallelograms = () => {
-        drawParallelogram(p1, p2, p3, p4, colors.red);
-        drawParallelogram(p6, p7, p8, p9, colors.black);
+        drawParallelogram(p1, p2, p3, p4, p5, p6, colors.red);
+        drawParallelogram(p7, p8, p9, p10, p11, p12, colors.black);
       };
 
       drawParallelograms();
