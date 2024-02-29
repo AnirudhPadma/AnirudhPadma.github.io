@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+    }
+
+    canvas {
+      width: 100%;
+      height: 100%;
+      border: 1px solid #d3d3d3;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="myCanvas"></canvas>
+
+  <script>
+    window.onload = function() {
+      const canvas = document.getElementById("myCanvas");
+      const context = canvas.getContext("2d");
+
+      // Resize canvas on window resize
+      const resizeCanvas = () => {
+        const borderWidth = parseInt(window.getComputedStyle(canvas).borderWidth, 10);
+        canvas.width = window.innerWidth - 2 * borderWidth;
+        canvas.height = window.innerHeight - 2 * borderWidth;
+      };
+      resizeCanvas();
+      window.addEventListener('resize', resizeCanvas);
+
+      // Define triangle coordinates
+      const topLeft = { x: 0, y: 0 };
+      const center = { x: canvas.width / 2, y: canvas.height / 2 };
+      const bottomLeft = { x: 0, y: canvas.height };
+      const topRight = { x: canvas.width, y: 0 };
+      const bottomRight = { x: canvas.width, y: canvas.height };
+
+      // Define colors
+      const colors = { red: 'red', black: 'black' };
+
+      const drawTriangle = (x1, y1, x2, y2, x3, y3, color) => {
+        context.beginPath();
+        context.moveTo(x1, y1);
+        context.lineTo(x2, y2);
+        context.lineTo(x3, y3);
+        context.closePath();
+
+        context.lineWidth = Math.min(canvas.width, canvas.height) / 50;
+        context.strokeStyle = color;
+        context.stroke();
+      };
+
+      drawTriangle(topLeft.x, topLeft.y, center.x, center.y, bottomLeft.x, bottomLeft.y, colors.red);
+      drawTriangle(topRight.x, topRight.y, center.x, center.y, bottomRight.x, bottomRight.y, colors.black);
+
+      function handleDeviceMotion(e) {
+        context.clearRect(0, 0, canvas.width, canvas.height); // clear canvas
+
+        // Use e.accelerationIncludingGravity.x and e.accelerationIncludingGravity.y to subtly change your image
+        // Redraw your image here
+
+        requestAnimationFrame(handleDeviceMotion);
+      }
+
+      if (typeof DeviceMotionEvent.requestPermission === 'function') {
+        DeviceMotionEvent.requestPermission()
+          .then(permissionState => {
+            if (permissionState === 'granted') {
+              window.addEventListener('devicemotion', handleDeviceMotion);
+            } else {
+              // Handle permission denied
+            }
+          })
+          .catch(console.error);
+      } else {
+        // Handle non-iOS 13+ devices
+        window.addEventListener('devicemotion', handleDeviceMotion);
+      }
+    };
+  </script>
+</body>
+</html>
