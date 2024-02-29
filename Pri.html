@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Op Art Canvas Drawing</title>
+    <style>
+        body, html, canvas {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="canvas"></canvas>
+    <script>
+        // Get the canvas element and context
+        let canvas = document.getElementById('canvas');
+        let ctx = canvas.getContext('2d');
+
+        // Resize the canvas to fill the screen
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        // Define the size of the individual triangles
+        let triangleSize = Math.min(canvas.width, canvas.height) / Math.sqrt(20);
+
+        // Variables for device motion
+        let xMotion = 0;
+        let yMotion = 0;
+
+        // Variable for triangle color
+        let triangleColor = 'black';
+
+        // Function to draw the triangles
+        function drawTriangles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            for (let i = 0; i < 20; i++) {
+                let x = ((i % 5) * triangleSize) + xMotion;
+                let y = (Math.floor(i / 5) * triangleSize) + yMotion;
+
+                // Save the current context
+                ctx.save();
+
+                // Translate to the center of the triangle
+                ctx.translate(x + triangleSize / 2, y + triangleSize / 2);
+
+                // Draw the white inverted pyramid
+                ctx.beginPath();
+                ctx.moveTo(-triangleSize / 2, triangleSize / 2);
+                ctx.lineTo(0, -triangleSize / 2);
+                ctx.lineTo(triangleSize / 2, triangleSize / 2);
+                ctx.closePath();
+                ctx.fillStyle = 'white';
+                ctx.fill();
+
+                // Draw the black inverted pyramid
+                ctx.beginPath();
+                ctx.moveTo(-triangleSize / 2, -triangleSize / 2);
+                ctx.lineTo(0, triangleSize / 2);
+                ctx.lineTo(triangleSize / 2, -triangleSize / 2);
+                ctx.closePath();
+                ctx.fillStyle = triangleColor;
+                ctx.fill();
+
+                // Restore the saved context
+                ctx.restore();
+            }
+
+            requestAnimationFrame(drawTriangles);
+        }
+
+        // Event listener for device motion
+        window.addEventListener('devicemotion', function(event) {
+            xMotion = event.accelerationIncludingGravity.x;
+            yMotion = event.accelerationIncludingGravity.y;
+            triangleColor = 'white';
+        });
+
+        // Call to requestAnimationFrame
+        requestAnimationFrame(drawTriangles);
+    </script>
+</body>
+</html>
