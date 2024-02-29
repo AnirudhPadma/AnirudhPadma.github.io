@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+    }
+
+    canvas {
+      width: 100%;
+      height: 100%;
+      border: 1px solid #d3d3d3;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="myCanvas"></canvas>
+
+  <script>
+    window.onload = function() {
+      const canvas = document.getElementById("myCanvas");
+      const context = canvas.getContext("2d");
+
+      // Resize canvas on window resize
+      const resizeCanvas = () => {
+        const borderWidth = parseInt(window.getComputedStyle(canvas).borderWidth, 10);
+        canvas.width = window.innerWidth - 2 * borderWidth;
+        canvas.height = window.innerHeight - 2 * borderWidth;
+      };
+      resizeCanvas();
+      window.addEventListener('resize', resizeCanvas);
+
+      // Define parallelogram coordinates
+      let topLeft = { x: canvas.width / 4, y: 0 };
+      let topRight = { x: 3 * canvas.width / 4, y: 0 };
+      let bottomLeft = { x: 0, y: canvas.height / 2 };
+      let bottomRight = { x: canvas.width, y: canvas.height / 2 };
+      let centerTop = { x: canvas.width / 2, y: canvas.height / 4 };
+      let centerBottom = { x: canvas.width / 2, y: 3 * canvas.height / 4 };
+
+      // Define colors
+      const colors = { red: 'red', black: 'black' };
+
+      const drawParallelogram = (p1, p2, p3, p4, color) => {
+        context.beginPath();
+        context.moveTo(p1.x, p1.y);
+        context.lineTo(p2.x, p2.y);
+        context.lineTo(p3.x, p3.y);
+        context.lineTo(p4.x, p4.y);
+        context.closePath();
+
+        context.lineWidth = Math.min(canvas.width, canvas.height) / 50;
+        context.strokeStyle = color;
+        context.stroke();
+      };
+
+      const drawParallelograms = () => {
+        drawParallelogram(topLeft, centerTop, bottomRight, bottomLeft, colors.red);
+        drawParallelogram(topRight, centerTop, bottomLeft, bottomRight, colors.black);
+      };
+
+      drawParallelograms();
+
+      function handleDeviceMotion(e) {
+        context.clearRect(0, 0, canvas.width, canvas.height); // clear canvas
+
+        // Use e.accelerationIncludingGravity.x and e.accelerationIncludingGravity.y to subtly change your image
+        const rotation = Math.atan2(e.accelerationIncludingGravity.y, e.accelerationIncludingGravity.x);
+        context.save();
+        context.translate(canvas.width / 2, canvas.height / 2);
+        context.rotate(rotation);
+        context.translate(-canvas.width / 2, -canvas.height / 2);
+
+        // Redraw your image here
+        drawParallelograms();
+
+        context.restore();
+      }
+
+      if (typeof DeviceMotionEvent.requestPermission === 'function') {
+        DeviceMotionEvent.requestPermission()
+          .then(permissionState => {
+            if (permissionState === 'granted') {
+              window.addEventListener('devicemotion', handleDeviceMotion);
+            } else {
+              // Handle permission denied
+            }
+          })
+          .catch(console.error);
+      } else {
+        // Handle non-iOS 13+ devices
+        window.addEventListener('devicemotion', handleDeviceMotion);
+      }
+    };
+  </script>
+</body>
+</html>
