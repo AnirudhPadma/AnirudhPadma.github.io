@@ -29,6 +29,9 @@
         let xMotion = 0;
         let yMotion = 0;
 
+        // Array of colors
+        let colors = ['Blue', 'LightBlue', 'DarkBlue', 'Indigo', 'Teal'];
+
         // Function to draw the triangles
         function drawTriangles() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -52,13 +55,13 @@
                 ctx.fillStyle = 'white';
                 ctx.fill();
 
-                // Draw the black inverted pyramid
+                // Draw the colored inverted pyramid
                 ctx.beginPath();
                 ctx.moveTo(-triangleSize / 2, -triangleSize / 2);
                 ctx.lineTo(0, triangleSize / 2);
                 ctx.lineTo(triangleSize / 2, -triangleSize / 2);
                 ctx.closePath();
-                ctx.fillStyle = 'rgb(' + Math.abs(xMotion) * 10 + ',' + Math.abs(yMotion) * 10 + ',0)';
+                ctx.fillStyle = colors[Math.floor(Math.abs(xMotion + yMotion)) % colors.length];
                 ctx.fill();
 
                 // Restore the saved context
