@@ -36,8 +36,8 @@
       // Define parallelogram coordinates
       let topLeft = { x: canvas.width / 4, y: 0 };
       let topRight = { x: 3 * canvas.width / 4, y: 0 };
-      let bottomLeft = { x: 0, y: canvas.height / 2 };
-      let bottomRight = { x: canvas.width, y: canvas.height / 2 };
+      let bottomLeft = { x: 0, y: canvas.height };
+      let bottomRight = { x: canvas.width, y: canvas.height };
       let centerTop = { x: canvas.width / 2, y: canvas.height / 4 };
       let centerBottom = { x: canvas.width / 2, y: 3 * canvas.height / 4 };
 
@@ -58,8 +58,8 @@
       };
 
       const drawParallelograms = () => {
-        drawParallelogram(topLeft, centerTop, bottomRight, bottomLeft, colors.red);
-        drawParallelogram(topRight, centerTop, bottomLeft, bottomRight, colors.black);
+        drawParallelogram(topLeft, centerTop, bottomRight, centerBottom, colors.red);
+        drawParallelogram(topRight, centerTop, bottomLeft, centerBottom, colors.black);
       };
 
       drawParallelograms();
