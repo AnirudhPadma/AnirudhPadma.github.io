@@ -39,25 +39,25 @@
             let animationFrameId;
             let alpha = 0;
             let motion = { x: 0, y: 0 };
+            let currentSquare = { x: 0, y: 0 };
 
             if (window.DeviceMotionEvent) {
                 window.addEventListener('devicemotion', function (event) {
                     motion = { x: event.accelerationIncludingGravity.x, y: event.accelerationIncludingGravity.y };
+                    currentSquare.x = Math.floor(motion.x) % numSquaresX;
+                    currentSquare.y = Math.floor(motion.y) % numSquaresY;
                 });
             }
 
             function drawOpArt() {
                 for (let i = 0; i < numSquaresX; i++) {
                     for (let j = 0; j < numSquaresY; j++) {
-                        // Calculate random displacement
-                        const displacement = (Math.random() - 0.5) * 10 + motion.x / 10;
-
-                        if ((i + j) % 2 === 0) {
-                            ctx.fillStyle = 'black';
+                        if (i === currentSquare.x && j === currentSquare.y) {
+                            ctx.fillStyle = alpha > 0.5 ? 'black' : 'white';
                         } else {
-                            ctx.fillStyle = 'white';
+                            ctx.fillStyle = (i + j) % 2 === 0 ? 'black' : 'white';
                         }
-                        ctx.fillRect(i * squareSize + displacement, j * squareSize + displacement, squareSize, squareSize);
+                        ctx.fillRect(i * squareSize, j * squareSize, squareSize, squareSize);
                     }
                 }
             }
@@ -65,9 +65,6 @@
             function animate() {
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
                 drawOpArt();
-
-                ctx.fillStyle = `rgba(0, 0, 0, ${alpha})`;
-                ctx.fillRect(0, 0, canvas.width, canvas.height);
 
                 alpha += 0.01;
                 if (alpha >= 1) {
