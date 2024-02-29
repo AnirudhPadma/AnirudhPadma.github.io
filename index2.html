@@ -23,26 +23,6 @@
     window.onload = function() {
       const canvas = document.getElementById("myCanvas");
       const context = canvas.getContext("2d");
-      // Request device motion permission proactively
-      requestPermission();
-
-      function requestPermission() {
-        if (typeof DeviceMotionEvent.requestPermission === 'function') {
-          DeviceMotionEvent.requestPermission()
-            .then(permissionState => {
-              if (permissionState === 'granted') {
-                window.addEventListener('devicemotion', handleDeviceMotion);
-              } else {
-                // Handle permission denied
-                console.error("Device motion permission denied.");
-              }
-            })
-            .catch(console.error);
-        } else {
-          // Handle non-iOS 13+ devices
-          window.addEventListener('devicemotion', handleDeviceMotion);
-        }
-      }
 
       // Resize canvas on window resize
       const resizeCanvas = () => {
@@ -75,14 +55,19 @@
         context.stroke();
       };
 
-      drawTriangle(topLeft.x, topLeft.y, center.x, center.y, bottomLeft.x, bottomLeft.y, colors.red);
-      drawTriangle(topRight.x, topRight.y, center.x, center.y, bottomRight.x, bottomRight.y, colors.black);
+      const drawTriangles = () => {
+        drawTriangle(topLeft.x, topLeft.y, center.x, center.y, bottomLeft.x, bottomLeft.y, colors.red);
+        drawTriangle(topRight.x, topRight.y, center.x, center.y, bottomRight.x, bottomRight.y, colors.black);
+      };
+
+      drawTriangles();
 
       function handleDeviceMotion(e) {
         context.clearRect(0, 0, canvas.width, canvas.height); // clear canvas
 
         // Use e.accelerationIncludingGravity.x and e.accelerationIncludingGravity.y to subtly change your image
         // Redraw your image here
+        drawTriangles();
 
         requestAnimationFrame(handleDeviceMotion);
       }
