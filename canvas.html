@@ -40,6 +40,9 @@
       let topRight = { x: canvas.width, y: 0 };
       let bottomRight = { x: canvas.width, y: canvas.height };
 
+      // Define colors
+      const colors = ['red', 'blue', 'green', 'yellow', 'purple', 'orange'];
+
       const drawTriangle = (x1, y1, x2, y2, x3, y3, color) => {
         context.beginPath();
         context.moveTo(x1, y1);
@@ -67,8 +70,9 @@
         context.rotate(rotation);
         context.translate(-center.x, -center.y);
 
-        // Generate a color based on the device motion
-        const color = `rgb(${Math.abs(e.accelerationIncludingGravity.x % 256)}, ${Math.abs(e.accelerationIncludingGravity.y % 256)}, ${Math.abs(e.accelerationIncludingGravity.z % 256)})`;
+        // Select a color based on the device motion
+        const colorIndex = Math.abs(Math.round(e.accelerationIncludingGravity.x)) % colors.length;
+        const color = colors[colorIndex];
 
         // Redraw your image here with the new color
         drawTriangles(color);
