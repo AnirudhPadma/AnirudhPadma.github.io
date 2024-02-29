@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Op Art Animation</title>
+    <style>
+        body,
+        html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+        }
+
+        canvas {
+            display: block;
+            margin: auto;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="opArtCanvas"></canvas>
+    <script>
+        window.onload = function () {
+            const canvas = document.getElementById('opArtCanvas');
+            const ctx = canvas.getContext('2d');
+
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+
+            const squareSize = 50; // Size of each square
+            const numSquaresX = Math.ceil(canvas.width / squareSize);
+            const numSquaresY = Math.ceil(canvas.height / squareSize);
+
+            let animationFrameId;
+            let alpha = 0;
+            let motion = { x: 0, y: 0 };
+
+            if (window.DeviceMotionEvent) {
+                window.addEventListener('devicemotion', function (event) {
+                    motion = { x: event.accelerationIncludingGravity.x, y: event.accelerationIncludingGravity.y };
+                });
+            }
+
+            function drawOpArt() {
+                for (let i = 0; i < numSquaresX; i++) {
+                    for (let j = 0; j < numSquaresY; j++) {
+                        // Calculate random displacement
+                        const displacement = (Math.random() - 0.5) * 10 + motion.x / 10;
+
+                        if ((i + j) % 2 === 0) {
+                            ctx.fillStyle = 'black';
+                        } else {
+                            ctx.fillStyle = 'white';
+                        }
+                        ctx.fillRect(i * squareSize + displacement, j * squareSize + displacement, squareSize, squareSize);
+                    }
+                }
+            }
+
+            function animate() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                drawOpArt();
+
+                ctx.fillStyle = `rgba(0, 0, 0, ${alpha})`;
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+                alpha += 0.01;
+                if (alpha >= 1) {
+                    alpha = 0; // Reset alpha to create a pulsing effect
+                }
+                animationFrameId = requestAnimationFrame(animate);
+            }
+
+            animate();
+        };
+    </script>
+</body>
+
+</html>
