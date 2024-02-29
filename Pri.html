@@ -30,7 +30,7 @@
         let yMotion = 0;
 
         // Array of colors
-        let colors = ['red', 'yellow', 'green', 'blue'];
+        let colors = ['LightSalmon', 'Yellow', 'LightGreen', 'LightBlue'];
 
         // Function to draw the triangles
         function drawTriangles() {
@@ -61,7 +61,7 @@
                 ctx.lineTo(0, triangleSize / 2);
                 ctx.lineTo(triangleSize / 2, -triangleSize / 2);
                 ctx.closePath();
-                ctx.fillStyle = colors[i % colors.length];
+                ctx.fillStyle = colors[Math.floor(Math.abs(xMotion + yMotion)) % colors.length];
                 ctx.fill();
 
                 // Restore the saved context
