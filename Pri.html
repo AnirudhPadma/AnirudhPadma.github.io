@@ -29,9 +29,6 @@
         let xMotion = 0;
         let yMotion = 0;
 
-        // Variable for triangle color
-        let triangleColor = 'black';
-
         // Function to draw the triangles
         function drawTriangles() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -61,7 +58,7 @@
                 ctx.lineTo(0, triangleSize / 2);
                 ctx.lineTo(triangleSize / 2, -triangleSize / 2);
                 ctx.closePath();
-                ctx.fillStyle = triangleColor;
+                ctx.fillStyle = 'rgb(' + Math.abs(xMotion) * 10 + ',' + Math.abs(yMotion) * 10 + ',0)';
                 ctx.fill();
 
                 // Restore the saved context
@@ -75,7 +72,6 @@
         window.addEventListener('devicemotion', function(event) {
             xMotion = event.accelerationIncludingGravity.x;
             yMotion = event.accelerationIncludingGravity.y;
-            triangleColor = 'white';
         });
 
         // Call to requestAnimationFrame
