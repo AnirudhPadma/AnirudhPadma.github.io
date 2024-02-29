@@ -23,6 +23,26 @@
     window.onload = function() {
       const canvas = document.getElementById("myCanvas");
       const context = canvas.getContext("2d");
+      // Request device motion permission proactively
+      requestPermission();
+
+      function requestPermission() {
+        if (typeof DeviceMotionEvent.requestPermission === 'function') {
+          DeviceMotionEvent.requestPermission()
+            .then(permissionState => {
+              if (permissionState === 'granted') {
+                window.addEventListener('devicemotion', handleDeviceMotion);
+              } else {
+                // Handle permission denied
+                console.error("Device motion permission denied.");
+              }
+            })
+            .catch(console.error);
+        } else {
+          // Handle non-iOS 13+ devices
+          window.addEventListener('devicemotion', handleDeviceMotion);
+        }
+      }
 
       // Resize canvas on window resize
       const resizeCanvas = () => {
