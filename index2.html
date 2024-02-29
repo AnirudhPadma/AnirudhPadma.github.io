@@ -34,11 +34,11 @@
       window.addEventListener('resize', resizeCanvas);
 
       // Define triangle coordinates
-      const topLeft = { x: 0, y: 0 };
-      const center = { x: canvas.width / 2, y: canvas.height / 2 };
-      const bottomLeft = { x: 0, y: canvas.height };
-      const topRight = { x: canvas.width, y: 0 };
-      const bottomRight = { x: canvas.width, y: canvas.height };
+      let topLeft = { x: 0, y: 0 };
+      let center = { x: canvas.width / 2, y: canvas.height / 2 };
+      let bottomLeft = { x: 0, y: canvas.height };
+      let topRight = { x: canvas.width, y: 0 };
+      let bottomRight = { x: canvas.width, y: canvas.height };
 
       // Define colors
       const colors = { red: 'red', black: 'black' };
@@ -66,8 +66,16 @@
         context.clearRect(0, 0, canvas.width, canvas.height); // clear canvas
 
         // Use e.accelerationIncludingGravity.x and e.accelerationIncludingGravity.y to subtly change your image
+        const rotation = Math.atan2(e.accelerationIncludingGravity.y, e.accelerationIncludingGravity.x);
+        context.save();
+        context.translate(center.x, center.y);
+        context.rotate(rotation);
+        context.translate(-center.x, -center.y);
+
         // Redraw your image here
         drawTriangles();
+
+        context.restore();
 
         requestAnimationFrame(handleDeviceMotion);
       }
