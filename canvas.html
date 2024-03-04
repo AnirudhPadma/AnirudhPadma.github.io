@@ -24,7 +24,6 @@
       const canvas = document.getElementById("myCanvas");
       const context = canvas.getContext("2d");
 
-      // Resize canvas on window resize
       const resizeCanvas = () => {
         const borderWidth = parseInt(window.getComputedStyle(canvas).borderWidth, 10);
         canvas.width = window.innerWidth - 2 * borderWidth;
@@ -33,15 +32,11 @@
       resizeCanvas();
       window.addEventListener('resize', resizeCanvas);
 
-      // Define triangle coordinates
       let topLeft = { x: 0, y: 0 };
       let center = { x: canvas.width / 2, y: canvas.height / 2 };
       let bottomLeft = { x: 0, y: canvas.height };
       let topRight = { x: canvas.width, y: 0 };
       let bottomRight = { x: canvas.width, y: canvas.height };
-
-      // Define colors
-      const colors = ['red', 'blue', 'green', 'yellow', 'purple', 'orange'];
 
       const drawTriangle = (x1, y1, x2, y2, x3, y3, color) => {
         context.beginPath();
@@ -61,39 +56,21 @@
       };
 
       function handleDeviceMotion(e) {
-        context.clearRect(0, 0, canvas.width, canvas.height); // clear canvas
-
-        // Use e.accelerationIncludingGravity.x and e.accelerationIncludingGravity.y to subtly change your image
+        context.clearRect(0, 0, canvas.width, canvas.height);
         const rotation = Math.atan2(e.accelerationIncludingGravity.y, e.accelerationIncludingGravity.x);
-        context.save();
-        context.translate(center.x, center.y);
-        context.rotate(rotation);
-        context.translate(-center.x, -center.y);
 
-        // Select a color based on the device motion
-        const colorIndex = Math.abs(Math.round(e.accelerationIncludingGravity.x)) % colors.length;
-        const color = colors[colorIndex];
+        // Map the acceleration values to RGB values
+        const r = Math.abs(e.accelerationIncludingGravity.x) * 10;
+        const g = Math.abs(e.accelerationIncludingGravity.y) * 10;
+        const b = Math.abs(e.accelerationIncludingGravity.z) * 10;
 
-        // Redraw your image here with the new color
+        // Ensure the RGB values are within the valid range
+        const color = `rgb(${Math.min(255, r)}, ${Math.min(255, g)}, ${Math.min(255, b)})`;
+
         drawTriangles(color);
-
-        context.restore();
       }
 
-      if (typeof DeviceMotionEvent.requestPermission === 'function') {
-        DeviceMotionEvent.requestPermission()
-          .then(permissionState => {
-            if (permissionState === 'granted') {
-              window.addEventListener('devicemotion', handleDeviceMotion);
-            } else {
-              // Handle permission denied
-            }
-          })
-          .catch(console.error);
-      } else {
-        // Handle non-iOS 13+ devices
-        window.addEventListener('devicemotion', handleDeviceMotion);
-      }
+      window.addEventListener('devicemotion', handleDeviceMotion);
     };
   </script>
 </body>
