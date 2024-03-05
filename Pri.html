@@ -14,25 +14,20 @@
 <body>
     <canvas id="canvas"></canvas>
     <script>
-        // Get the canvas element and context
+        
         let canvas = document.getElementById('canvas');
         let ctx = canvas.getContext('2d');
 
-        // Resize the canvas to fill the screen
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
 
-        // Define the size of the individual triangles
         let triangleSize = Math.min(canvas.width, canvas.height) / Math.sqrt(20);
 
-        // Variables for device motion
         let xMotion = 0;
         let yMotion = 0;
 
-        // Array of colors
         let colors = ['Blue', 'LightBlue', 'DarkBlue', 'Indigo', 'Teal'];
 
-        // Function to draw the triangles
         function drawTriangles() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -40,13 +35,9 @@
                 let x = ((i % 5) * triangleSize) + xMotion;
                 let y = (Math.floor(i / 5) * triangleSize) + yMotion;
 
-                // Save the current context
                 ctx.save();
 
-                // Translate to the center of the triangle
                 ctx.translate(x + triangleSize / 2, y + triangleSize / 2);
-
-                // Draw the white inverted pyramid
                 ctx.beginPath();
                 ctx.moveTo(-triangleSize / 2, triangleSize / 2);
                 ctx.lineTo(0, -triangleSize / 2);
@@ -55,7 +46,7 @@
                 ctx.fillStyle = 'white';
                 ctx.fill();
 
-                // Draw the colored inverted pyramid
+                
                 ctx.beginPath();
                 ctx.moveTo(-triangleSize / 2, -triangleSize / 2);
                 ctx.lineTo(0, triangleSize / 2);
@@ -64,20 +55,20 @@
                 ctx.fillStyle = colors[Math.floor(Math.abs(xMotion + yMotion)) % colors.length];
                 ctx.fill();
 
-                // Restore the saved context
                 ctx.restore();
             }
 
             requestAnimationFrame(drawTriangles);
         }
 
-        // Event listener for device motion
         window.addEventListener('devicemotion', function(event) {
             xMotion = event.accelerationIncludingGravity.x;
             yMotion = event.accelerationIncludingGravity.y;
+            let msg = new SpeechSynthesisUtterance("Hey, you're shaking me");
+            window.speechSynthesis.speak(msg);
         });
 
-        // Call to requestAnimationFrame
+       
         requestAnimationFrame(drawTriangles);
     </script>
 </body>
