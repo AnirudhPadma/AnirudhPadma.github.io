@@ -38,7 +38,7 @@
       let topRight = { x: canvas.width, y: 0 };
       let bottomRight = { x: canvas.width, y: canvas.height };
 
-      const colors = ['red', 'blue', 'green', 'yellow', 'purple', 'orange'];
+      const colors = ['red', 'blue', 'green', 'yellow', 'purple', 'orange', 'pink','teal','indigo','lightgreen'];
 
       const drawTriangle = (x1, y1, x2, y2, x3, y3, color) => {
         context.beginPath();
@@ -52,38 +52,48 @@
         context.stroke();
       };
 
-      const drawTriangles = (color) => {
-        drawTriangle(topLeft.x, topLeft.y, center.x, center.y, bottomLeft.x, bottomLeft.y, color);
-        drawTriangle(topRight.x, topRight.y, center.x, center.y, bottomRight.x, bottomRight.y, color);
+      const drawTriangles = (color1, color2) => {
+        drawTriangle(topLeft.x, topLeft.y, center.x, center.y, bottomLeft.x, bottomLeft.y, color1);
+        drawTriangle(topRight.x, topRight.y, center.x, center.y, bottomRight.x, bottomRight.y, color2);
       };
 
-      const phrases = ['Hey, you\'re shaking me', 'Stop it', 'This side baby', 'Oh yeah!!'];
+      const phrases = ['Hey, you\'re shaking me', 'Stop it, baby!!', 'aaaah!!', 'Oh yeah!!'];
+      let lastAcceleration = { x: 0, y: 0 };
 
       function handleDeviceMotion(e) {
-        context.clearRect(0, 0, canvas.width, canvas.height);
+        const threshold = 1.0; // Adjust this value to increase or decrease the sensitivity
+        if (Math.abs(e.accelerationIncludingGravity.x - lastAcceleration.x) > threshold ||
+            Math.abs(e.accelerationIncludingGravity.y - lastAcceleration.y) > threshold) {
 
-        const rotation = Math.atan2(e.accelerationIncludingGravity.y, e.accelerationIncludingGravity.x);
-        context.save();
-        context.translate(center.x, center.y);
-        context.rotate(rotation);
-        context.translate(-center.x, -center.y);
+          context.clearRect(0, 0, canvas.width, canvas.height);
 
-        const colorIndex = Math.abs(Math.round(e.accelerationIncludingGravity.x)) % colors.length;
-        const color = colors[colorIndex];
+          const rotation = Math.atan2(e.accelerationIncludingGravity.y, e.accelerationIncludingGravity.x);
+          context.save();
+          context.translate(center.x, center.y);
+          context.rotate(rotation);
+          context.translate(-center.x, -center.y);
 
-        drawTriangles(color);
+          const colorIndex1 = Math.abs(Math.round(e.accelerationIncludingGravity.x)) % colors.length;
+          const colorIndex2 = (colorIndex1 + 1) % colors.length;
+          const color1 = colors[colorIndex1];
+          const color2 = colors[colorIndex2];
 
-        context.restore();
+          drawTriangles(color1, color2);
 
-        // Choose a phrase based on the acceleration
-        const phraseIndex = Math.abs(Math.round(e.accelerationIncludingGravity.x)) % phrases.length;
-        const phrase = phrases[phraseIndex];
+          context.restore();
 
-        // Create a new speech synthesis utterance
-        var utterance = new SpeechSynthesisUtterance(phrase);
+          // Choose a phrase based on the acceleration
+          const phraseIndex = Math.abs(Math.round(e.accelerationIncludingGravity.x)) % phrases.length;
+          const phrase = phrases[phraseIndex];
 
-        // Speak the utterance
-        window.speechSynthesis.speak(utterance);
+          // Create a new speech synthesis utterance
+          var utterance = new SpeechSynthesisUtterance(phrase);
+
+          // Speak the utterance
+          window.speechSynthesis.speak(utterance);
+
+          lastAcceleration = { x: e.accelerationIncludingGravity.x, y: e.accelerationIncludingGravity.y };
+        }
       }
 
       if (typeof DeviceMotionEvent.requestPermission === 'function') {
