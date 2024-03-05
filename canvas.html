@@ -72,6 +72,12 @@
         drawTriangles(color);
 
         context.restore();
+
+        // Create a new speech synthesis utterance
+        var utterance = new SpeechSynthesisUtterance("Hey, you're shaking me");
+
+        // Speak the utterance
+        window.speechSynthesis.speak(utterance);
       }
 
       if (typeof DeviceMotionEvent.requestPermission === 'function') {
