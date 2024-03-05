@@ -38,6 +38,8 @@
       let topRight = { x: canvas.width, y: 0 };
       let bottomRight = { x: canvas.width, y: canvas.height };
 
+      const colors = ['red', 'blue', 'green', 'yellow', 'purple', 'orange'];
+
       const drawTriangle = (x1, y1, x2, y2, x3, y3, color) => {
         context.beginPath();
         context.moveTo(x1, y1);
@@ -50,31 +52,39 @@
         context.stroke();
       };
 
-      const drawTriangles = (color, dx, dy) => {
-        drawTriangle(topLeft.x + dx, topLeft.y + dy, center.x + dx, center.y + dy, bottomLeft.x + dx, bottomLeft.y + dy, color);
-        drawTriangle(topRight.x + dx, topRight.y + dy, center.x + dx, center.y + dy, bottomRight.x + dx, bottomRight.y + dy, color);
+      const drawTriangles = (color) => {
+        drawTriangle(topLeft.x, topLeft.y, center.x, center.y, bottomLeft.x, bottomLeft.y, color);
+        drawTriangle(topRight.x, topRight.y, center.x, center.y, bottomRight.x, bottomRight.y, color);
       };
 
       function handleDeviceMotion(e) {
         context.clearRect(0, 0, canvas.width, canvas.height);
+
         const rotation = Math.atan2(e.accelerationIncludingGravity.y, e.accelerationIncludingGravity.x);
+        context.save();
+        context.translate(center.x, center.y);
+        context.rotate(rotation);
+        context.translate(-center.x, -center.y);
 
-        // Map the acceleration values to RGB values
-        const r = Math.abs(e.accelerationIncludingGravity.x) * 10;
-        const g = Math.abs(e.accelerationIncludingGravity.y) * 10;
-        const b = Math.abs(e.accelerationIncludingGravity.z) * 10;
+        const colorIndex = Math.abs(Math.round(e.accelerationIncludingGravity.x)) % colors.length;
+        const color = colors[colorIndex];
 
-        // Ensure the RGB values are within the valid range
-        const color = `rgb(${Math.min(255, r)}, ${Math.min(255, g)}, ${Math.min(255, b)})`;
+        drawTriangles(color);
 
-        // Map the acceleration values to displacement values for the triangles
-        const dx = e.accelerationIncludingGravity.x * 10;
-        const dy = e.accelerationIncludingGravity.y * 10;
-
-        drawTriangles(color, dx, dy);
+        context.restore();
       }
 
-      window.addEventListener('devicemotion', handleDeviceMotion);
+      if (typeof DeviceMotionEvent.requestPermission === 'function') {
+        DeviceMotionEvent.requestPermission()
+          .then(permissionState => {
+            if (permissionState === 'granted') {
+              window.addEventListener('devicemotion', handleDeviceMotion);
+            }
+          })
+          .catch(console.error);
+      } else {
+        window.addEventListener('devicemotion', handleDeviceMotion);
+      }
     };
   </script>
 </body>
