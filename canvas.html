@@ -59,6 +59,7 @@
 
       const phrases = ['Hey, you\'re shaking me', 'Stop it', 'This side baby', 'Oh yeah!!'];
       let lastAcceleration = { x: 0, y: 0 };
+      let speechTimeout;
 
       function handleDeviceMotion(e) {
         const threshold = 1.0; // Adjust this value to increase or decrease the sensitivity
@@ -89,11 +90,15 @@
           // Create a new speech synthesis utterance
           var utterance = new SpeechSynthesisUtterance(phrase);
 
-          // Delay the speech synthesis
-          setTimeout(function() {
-            // Speak the utterance
-            window.speechSynthesis.speak(utterance);
-          }, 2000); // 2 seconds delay
+          // Cancel the previous speech synthesis and start a new one
+          window.speechSynthesis.cancel();
+          window.speechSynthesis.speak(utterance);
+
+          // Set a timeout to stop the speech synthesis after 5 seconds
+          clearTimeout(speechTimeout);
+          speechTimeout = setTimeout(function() {
+            window.speechSynthesis.cancel();
+          }, 5000); // 5 seconds delay
 
           lastAcceleration = { x: e.accelerationIncludingGravity.x, y: e.accelerationIncludingGravity.y };
         } else {
