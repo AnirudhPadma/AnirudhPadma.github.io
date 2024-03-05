@@ -38,7 +38,7 @@
       let topRight = { x: canvas.width, y: 0 };
       let bottomRight = { x: canvas.width, y: canvas.height };
 
-      const colors = ['red', 'blue', 'green', 'yellow', 'purple', 'orange'];
+      const colors = ['red', 'blue', 'green', 'yellow', 'purple', 'orange', 'pink','teal','indigo','lightgreen'];
 
       const drawTriangle = (x1, y1, x2, y2, x3, y3, color) => {
         context.beginPath();
@@ -57,9 +57,8 @@
         drawTriangle(topRight.x, topRight.y, center.x, center.y, bottomRight.x, bottomRight.y, color2);
       };
 
-      const phrases = ['Hey, you\'re shaking me', 'Stop it', 'This side baby', 'Oh yeah!!'];
+      const phrases = ['Hey, you\'re shaking me', 'Stop it,\ baby!!', 'ahhh!!', 'Oh\ yeah!!','ummm','ufff' ];
       let lastAcceleration = { x: 0, y: 0 };
-      let speechTimeout;
 
       function handleDeviceMotion(e) {
         const threshold = 1.0; // Adjust this value to increase or decrease the sensitivity
@@ -90,20 +89,10 @@
           // Create a new speech synthesis utterance
           var utterance = new SpeechSynthesisUtterance(phrase);
 
-          // Cancel the previous speech synthesis and start a new one
-          window.speechSynthesis.cancel();
+          // Speak the utterance
           window.speechSynthesis.speak(utterance);
 
-          // Set a timeout to stop the speech synthesis after 5 seconds
-          clearTimeout(speechTimeout);
-          speechTimeout = setTimeout(function() {
-            window.speechSynthesis.cancel();
-          }, 5000); // 5 seconds delay
-
           lastAcceleration = { x: e.accelerationIncludingGravity.x, y: e.accelerationIncludingGravity.y };
-        } else {
-          // If the device is not moving significantly, cancel the speech synthesis
-          window.speechSynthesis.cancel();
         }
       }
 
