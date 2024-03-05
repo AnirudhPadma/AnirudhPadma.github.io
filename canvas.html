@@ -57,7 +57,7 @@
         drawTriangle(topRight.x, topRight.y, center.x, center.y, bottomRight.x, bottomRight.y, color2);
       };
 
-      const phrases = ['Hey, you\'re shaking me', 'Stop it,\ baby!!', 'ahhh!!', 'Oh\ yeah!!'];
+      const phrases = ['Hey, you\'re shaking me', 'Stop it,\ baby!!', 'ahhh!!', 'Oh\ yeah!!','ummmm'];
       let lastAcceleration = { x: 0, y: 0 };
 
       function handleDeviceMotion(e) {
@@ -93,6 +93,9 @@
           window.speechSynthesis.speak(utterance);
 
           lastAcceleration = { x: e.accelerationIncludingGravity.x, y: e.accelerationIncludingGravity.y };
+        } else {
+          // If the device is not moving significantly, cancel the speech synthesis
+          window.speechSynthesis.cancel();
         }
       }
 
