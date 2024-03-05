@@ -57,6 +57,8 @@
         drawTriangle(topRight.x, topRight.y, center.x, center.y, bottomRight.x, bottomRight.y, color);
       };
 
+      const phrases = ['Hey, you\'re shaking me', 'Stop it', 'This side baby', 'Oh yeah!!'];
+
       function handleDeviceMotion(e) {
         context.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -73,8 +75,12 @@
 
         context.restore();
 
+        // Choose a phrase based on the acceleration
+        const phraseIndex = Math.abs(Math.round(e.accelerationIncludingGravity.x)) % phrases.length;
+        const phrase = phrases[phraseIndex];
+
         // Create a new speech synthesis utterance
-        var utterance = new SpeechSynthesisUtterance("Hey, you're shaking me");
+        var utterance = new SpeechSynthesisUtterance(phrase);
 
         // Speak the utterance
         window.speechSynthesis.speak(utterance);
