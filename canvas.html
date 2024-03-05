@@ -50,9 +50,9 @@
         context.stroke();
       };
 
-      const drawTriangles = (color) => {
-        drawTriangle(topLeft.x, topLeft.y, center.x, center.y, bottomLeft.x, bottomLeft.y, color);
-        drawTriangle(topRight.x, topRight.y, center.x, center.y, bottomRight.x, bottomRight.y, color);
+      const drawTriangles = (color, dx, dy) => {
+        drawTriangle(topLeft.x + dx, topLeft.y + dy, center.x + dx, center.y + dy, bottomLeft.x + dx, bottomLeft.y + dy, color);
+        drawTriangle(topRight.x + dx, topRight.y + dy, center.x + dx, center.y + dy, bottomRight.x + dx, bottomRight.y + dy, color);
       };
 
       function handleDeviceMotion(e) {
@@ -67,7 +67,11 @@
         // Ensure the RGB values are within the valid range
         const color = `rgb(${Math.min(255, r)}, ${Math.min(255, g)}, ${Math.min(255, b)})`;
 
-        drawTriangles(color);
+        // Map the acceleration values to displacement values for the triangles
+        const dx = e.accelerationIncludingGravity.x * 10;
+        const dy = e.accelerationIncludingGravity.y * 10;
+
+        drawTriangles(color, dx, dy);
       }
 
       window.addEventListener('devicemotion', handleDeviceMotion);
