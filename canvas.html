@@ -62,9 +62,15 @@
       let lastPhraseIndex = -1;
 
       let currentAcceleration = { x: 0, y: 0 };
+      let lastUpdateTime = 0;
+      const updateInterval = 100; // Adjust this value to change the update frequency
 
       function handleDeviceMotion(e) {
-        currentAcceleration = { x: e.accelerationIncludingGravity.x, y: e.accelerationIncludingGravity.y };
+        const now = Date.now();
+        if (now - lastUpdateTime > updateInterval) {
+          currentAcceleration = { x: e.accelerationIncludingGravity.x, y: e.accelerationIncludingGravity.y };
+          lastUpdateTime = now;
+        }
       }
 
       function update() {
