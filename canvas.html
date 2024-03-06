@@ -59,7 +59,6 @@
 
       const phrases = ['Hey, you\'re shaking me', 'Stop it,\ baby!!', 'ahhh!!', 'Oh\ yeah!!',];
       let lastAcceleration = { x: 0, y: 0 };
-      let lastPhraseIndex = -1;
 
       function handleDeviceMotion(e) {
         const threshold = 1.0; // Adjust this value to increase or decrease the sensitivity
@@ -84,10 +83,7 @@
           context.restore();
 
           // Choose a phrase based on the acceleration
-          let phraseIndex;
-          do {
-            phraseIndex = Math.abs(Math.round(e.accelerationIncludingGravity.x)) % phrases.length;
-          } while (phraseIndex === lastPhraseIndex);
+          const phraseIndex = Math.abs(Math.round(e.accelerationIncludingGravity.x)) % phrases.length;
           const phrase = phrases[phraseIndex];
 
           // Create a new speech synthesis utterance
@@ -97,7 +93,6 @@
           window.speechSynthesis.speak(utterance);
 
           lastAcceleration = { x: e.accelerationIncludingGravity.x, y: e.accelerationIncludingGravity.y };
-          lastPhraseIndex = phraseIndex;
         }
       }
 
