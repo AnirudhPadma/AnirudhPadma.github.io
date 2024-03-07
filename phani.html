@@ -46,6 +46,12 @@
                     motion = { x: event.accelerationIncludingGravity.x, y: event.accelerationIncludingGravity.y };
                     currentSquare.x = Math.floor(motion.x) % numSquaresX;
                     currentSquare.y = Math.floor(motion.y) % numSquaresY;
+
+                    // Speech synthesis with delay
+                    setTimeout(function() {
+                        let utterance = new SpeechSynthesisUtterance("Hey, you're shaking me Phani");
+                        window.speechSynthesis.speak(utterance);
+                    }, 1000); // Delay of 1000ms
                 });
             }
 
