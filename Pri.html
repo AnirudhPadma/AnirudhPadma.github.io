@@ -25,6 +25,7 @@
 
         let xMotion = 0;
         let yMotion = 0;
+        let dampingFactor = 0.95; // Add a damping factor
 
         let colors = ['Blue', 'LightBlue', 'DarkBlue', 'Indigo', 'Teal'];
 
@@ -58,12 +59,16 @@
                 ctx.restore();
             }
 
+            // Apply the damping factor
+            xMotion *= dampingFactor;
+            yMotion *= dampingFactor;
+
             requestAnimationFrame(drawTriangles);
         }
 
         window.addEventListener('devicemotion', function(event) {
-            xMotion = event.accelerationIncludingGravity.x;
-            yMotion = event.accelerationIncludingGravity.y;
+            xMotion += event.accelerationIncludingGravity.x;
+            yMotion += event.accelerationIncludingGravity.y;
             let msg = new SpeechSynthesisUtterance("Hey, you're shaking me");
             window.speechSynthesis.speak(msg);
         });
