@@ -28,6 +28,9 @@
 
         let colors = ['Blue', 'LightBlue', 'DarkBlue', 'Indigo', 'Teal'];
 
+        let lastExecutionTime = Date.now();
+        const delay = 1000; // Delay in milliseconds
+
         function drawTriangles() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -61,28 +64,18 @@
             requestAnimationFrame(drawTriangles);
         }
 
-        let isSpeaking = false;
-        let lastMotionTime = Date.now();
-
         window.addEventListener('devicemotion', function(event) {
+            const currentTime = Date.now();
+            if (currentTime - lastExecutionTime < delay) {
+                return;
+            }
+            lastExecutionTime = currentTime;
+
             xMotion = event.accelerationIncludingGravity.x;
             yMotion = event.accelerationIncludingGravity.y;
-
-            if (!isSpeaking && Date.now() - lastMotionTime > 1000) {
-                let msg = new SpeechSynthesisUtterance("Hey, you're shaking me");
-                window.speechSynthesis.speak(msg);
-                isSpeaking = true;
-            }
-
-            lastMotionTime = Date.now();
+            let msg = new SpeechSynthesisUtterance("Hey, you're shaking me");
+            window.speechSynthesis.speak(msg);
         });
-
-        setInterval(function() {
-            if (isSpeaking && Date.now() - lastMotionTime > 1000) {
-                window.speechSynthesis.cancel();
-                isSpeaking = false;
-            }
-        }, 100);
 
        
         requestAnimationFrame(drawTriangles);
