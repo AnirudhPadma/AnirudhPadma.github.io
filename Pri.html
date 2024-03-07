@@ -61,12 +61,28 @@
             requestAnimationFrame(drawTriangles);
         }
 
+        let isSpeaking = false;
+        let lastMotionTime = Date.now();
+
         window.addEventListener('devicemotion', function(event) {
             xMotion = event.accelerationIncludingGravity.x;
             yMotion = event.accelerationIncludingGravity.y;
-            let msg = new SpeechSynthesisUtterance("Hey, you're shaking me");
-            window.speechSynthesis.speak(msg);
+
+            if (!isSpeaking && Date.now() - lastMotionTime > 1000) {
+                let msg = new SpeechSynthesisUtterance("Hey, you're shaking me");
+                window.speechSynthesis.speak(msg);
+                isSpeaking = true;
+            }
+
+            lastMotionTime = Date.now();
         });
+
+        setInterval(function() {
+            if (isSpeaking && Date.now() - lastMotionTime > 1000) {
+                window.speechSynthesis.cancel();
+                isSpeaking = false;
+            }
+        }, 100);
 
        
         requestAnimationFrame(drawTriangles);
