@@ -25,9 +25,6 @@
             }
         });
             
-            
-                
-
         window.addEventListener("deviceorientation", handleOrientation, true);        
 
         function handleOrientation(event) {
@@ -41,28 +38,24 @@
                 const ctxt = canvas.getContext('2d');
                 ctxt.clearRect(0, 0, window.innerWidth, window.innerHeight);
                 topdraw(beta);
-                // speak();
             }
             else if(beta>5){
                 const canvas = document.querySelector('canvas');
                 const ctxt = canvas.getContext('2d');
                 ctxt.clearRect(0, 0, window.innerWidth, window.innerHeight);
                 topdraw(beta);
-                // speak();
             }
             else if(gamma<-5&&beta>-5&&beta<5){
                 const canvas = document.querySelector('canvas');
                 const ctxt = canvas.getContext('2d');
                 ctxt.clearRect(0, 0, window.innerWidth, window.innerHeight);
                 sidedraw(gamma);
-                // speak();
             }
             else if(gamma>5&&beta<-5&&beta<5){
                 const canvas = document.querySelector('canvas');
                 const ctxt = canvas.getContext('2d');
                 ctxt.clearRect(0, 0, window.innerWidth, window.innerHeight);
                 sidedraw(gamma);
-                // speak();
             }
             else {
                 const canvas = document.querySelector('canvas');
@@ -132,12 +125,10 @@
 
         //vertical tilt activation
         function topdraw(beta){
-            
             const canvas = document.querySelector('canvas');
             const ctx = canvas.getContext('2d');
             canvas.width=400;
             canvas.height=800;
-            
 
             for(let m=0;m<400;m=m+160){
                 ctx.beginPath();
@@ -201,4 +192,34 @@
             for(let m=0;m<window.innerWidth;m=m+((window.innerWidth)/6)){
                 ctx.beginPath();
                 ctx.moveTo(m, window.innerHeight);
-                ctx.lineTo((m+(window.innerWidth)/6),window.innerHeight/
+                ctx.lineTo((m+(window.innerWidth)/6),window.innerHeight/2);
+                ctx.quadraticCurveTo((m+(window.innerWidth)/6)+(window.innerWidth)/24, (window.innerHeight/4)*3, (m+(window.innerWidth)/6), window.innerHeight);
+                ctx.lineTo(m, window.innerHeight);
+                ctx.stroke();
+                ctx.fillStyle = random_rgba();
+                ctx.strokeStyle = "white";
+                ctx.fill();
+            }
+
+            ctx.beginPath();
+            ctx.moveTo(0,(window.innerHeight)/2);
+            ctx.lineTo((window.innerWidth)/6,0);
+            ctx.lineTo(0,0);
+            ctx.stroke();
+            ctx.fillStyle = random_rgba();
+            ctx.strokeStyle = "white";
+            ctx.fill();
+
+            ctx.beginPath();
+            ctx.moveTo(window.innerWidth,0);
+            ctx.lineTo((window.innerWidth)-((window.innerWidth)/6),window.innerHeight/2);
+            ctx.lineTo((window.innerWidth)-((window.innerWidth)/6),0)
+            ctx.stroke();
+            ctx.fillStyle = random_rgba();
+            ctx.strokeStyle = "white";
+            ctx.fill();
+        }
+        window.onload=draw;
+    </script>
+</body>
+</html>
