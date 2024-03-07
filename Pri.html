@@ -31,6 +31,9 @@
 
         let motionThreshold = 1.0; // Set a threshold for motion
 
+        let coolDown = false; // Add a cool down flag
+        let coolDownPeriod = 5000; // Set a cool down period (in milliseconds)
+
         function drawTriangles() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -72,10 +75,16 @@
             xMotion += event.accelerationIncludingGravity.x;
             yMotion += event.accelerationIncludingGravity.y;
 
-            // Check if the motion is above the threshold
-            if (Math.abs(xMotion) > motionThreshold || Math.abs(yMotion) > motionThreshold) {
+            // Check if the motion is above the threshold and the cool down period has ended
+            if ((Math.abs(xMotion) > motionThreshold || Math.abs(yMotion) > motionThreshold) && !coolDown) {
                 let msg = new SpeechSynthesisUtterance("Hey, you're shaking me");
                 window.speechSynthesis.speak(msg);
+
+                // Start the cool down period
+                coolDown = true;
+                setTimeout(function() {
+                    coolDown = false;
+                }, coolDownPeriod);
             }
         });
 
